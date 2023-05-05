@@ -1,0 +1,22 @@
+package br.edu.univas.si7.topicos.customer.dto;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+public class CustomerDto {
+	
+	
+	private String id;
+	private String name;
+	private String email;
+	private String phoneNumber;
+	
+	
+	public CustomerDto(ProductEntity product) {
+		this.code = product.getCode();
+		this.name = product.getName();
+		this.price = product.getPrice();
+		this.dateCreated = product.getCreatedAt();
+}

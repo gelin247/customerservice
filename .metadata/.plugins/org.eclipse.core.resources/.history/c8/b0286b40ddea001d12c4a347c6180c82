@@ -1,0 +1,20 @@
+package br.edu.univas.si7.topicos.customer.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@Entity
+@Data
+
+public class CustomerEntity {
+
+	@Id
+	private String id;
+	private String name;
+	private String email;
+	private String phoneNumber;
+}

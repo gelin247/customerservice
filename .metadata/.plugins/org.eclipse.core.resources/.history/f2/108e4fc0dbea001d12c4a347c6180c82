@@ -1,0 +1,5 @@
+package br.edu.univas.si7.topicos.customer.entity;
+
+public enum CustomerType {
+
+}
