@@ -1,7 +1,0 @@
-package br.edu.univas.si7.topicos.customer.repository;
-
-public interface CustomerRepository extends JpaRepository<ProductEntity, Integer> {
-	
-	public List<ProductEntity>findByActive(Boolean active);
-	
-}

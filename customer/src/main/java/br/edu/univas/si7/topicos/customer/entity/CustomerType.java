@@ -2,6 +2,8 @@ package br.edu.univas.si7.topicos.customer.entity;
 
 import java.util.stream.Stream;
 
+import br.edu.univas.si7.topicos.customer.exception.CustomerException;
+
 public enum CustomerType {
 	PESSOAFISICA(10), PESSOAJURIDICA(20);
 
@@ -17,7 +19,7 @@ public enum CustomerType {
 		return Stream.of(CustomerType.values())
 				.filter(t -> t.getCode() == code)
 				.findFirst()
-				.orElseThrow(() -> new InvalidDataException("Invalid unit: " +
+				.orElseThrow(() -> new CustomerException("Invalid unit: " +
 
 						code));
 	}

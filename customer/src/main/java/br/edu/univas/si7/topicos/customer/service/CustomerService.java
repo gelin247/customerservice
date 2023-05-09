@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import br.edu.univas.si7.topicos.customer.dto.CustomerDto;
 import br.edu.univas.si7.topicos.customer.entity.CustomerEntity;
+import br.edu.univas.si7.topicos.customer.exception.CustomerException;
+import br.edu.univas.si7.topicos.customer.exception.ObjectNotFoundException;
 import br.edu.univas.si7.topicos.customer.repository.CustomerRepository;
 
 @Service
@@ -25,9 +27,9 @@ public class CustomerService {
 		return repo.findAll().stream().map(p -> new CustomerDto(p)).collect(Collectors.toList());
 	}
 
-	public CustomerEntity findById(Integer code) {
-		Optional<CustomerEntity> obj = repo.findById(code);
-		CustomerEntity entity = obj.orElseThrow(() -> new ObjectNotFoundException("Product " + code + " not found"));
+	public CustomerEntity findById(Integer id) {
+		Optional<CustomerEntity> obj = repo.findById(id);
+		CustomerEntity entity = obj.orElseThrow(() -> new ObjectNotFoundException("Customer " + id + " not found"));
 		return entity;
 	}
 
@@ -36,33 +38,30 @@ public class CustomerService {
 	}
 
 	public CustomerEntity toEntity(CustomerDto cust) {
-		return new CustomerEntity(cust.getId(), cust.getName(), cust.getEmail(), cust.getPhoneNumber(), );
+		return new CustomerEntity(cust.getId(), cust.getName(), cust.getEmail(), cust.getPhoneNumber());
 	}
 
-	public void updateProduct(ProductEntity product, Integer code) {
-		if (code == null || product == null || !code.equals(product.getCode())) {
-			throw new ProductException("Invalid product code.");
+	public void updateCustomer(CustomerEntity customer, Integer id) {
+		if (id == null || customer == null || !id.equals(customer.getId())) {
+			throw new CustomerException("Invalid customer id.");
 		}
-		ProductEntity existingObj = findById(code);
-		updateData(existingObj, product);
+		CustomerEntity existingObj = findById(id);
+		updateData(existingObj, customer);
 		repo.save(existingObj);
 	}
 
-	private void updateData(ProductEntity existingObj, ProductEntity obj) {
+	private void updateData(CustomerEntity existingObj, CustomerEntity obj) {
 		existingObj.setName(obj.getName());
 	}
 
-	public void deleteProduct(Integer code) {
-		if (code == null) {
-			throw new ProductException("Product code can not be null.");
+	public void deleteCustomer(Integer id) {
+		if (id == null) {
+			throw new CustomerException("Customer id can not be null.");
 		}
-		ProductEntity obj = findById(code);
-		try {
-			repo.delete(obj);
-			// desativar o produto (ao invés de deletar)
-		} catch (DataIntegrityViolationException e) {
-			throw new ProductException("Can not delete a Product with dependencies constraints.");
-		}
+
+		CustomerEntity obj = findById(id);
+		repo.delete(obj);
+
 	}
 
 }

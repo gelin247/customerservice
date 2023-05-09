@@ -1,8 +1,0 @@
-package br.edu.univas.si7.topicos.customer.service;
-
-import org.springframework.stereotype.Service;
-
-@Service
-public class CustomerService {
-
-}

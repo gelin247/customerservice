@@ -1,9 +1,0 @@
-package br.edu.univas.si7.topicos.customer.repository;
-
-import java.util.List;
-
-public interface CustomerRepository extends JpaRepository<CustomerEntity, Integer> {
-	
-	public List<ProductEntity>findByActive(Boolean active);
-	
-}
