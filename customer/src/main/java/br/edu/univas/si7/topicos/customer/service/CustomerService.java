@@ -27,7 +27,7 @@ public class CustomerService {
 		return repo.findAll().stream().map(p -> new CustomerDto(p)).collect(Collectors.toList());
 	}
 
-	public CustomerEntity findById(Integer id) {
+	public CustomerEntity findById(String id) {
 		Optional<CustomerEntity> obj = repo.findById(id);
 		CustomerEntity entity = obj.orElseThrow(() -> new ObjectNotFoundException("Customer " + id + " not found"));
 		return entity;
@@ -38,10 +38,10 @@ public class CustomerService {
 	}
 
 	public CustomerEntity toEntity(CustomerDto cust) {
-		return new CustomerEntity(cust.getId(), cust.getName(), cust.getEmail(), cust.getPhoneNumber());
+		return new CustomerEntity(cust.getId(), cust.getName(), cust.getEmail(), cust.getPhoneNumber(), cust.getType());
 	}
 
-	public void updateCustomer(CustomerEntity customer, Integer id) {
+	public void updateCustomer(CustomerEntity customer, String id) {
 		if (id == null || customer == null || !id.equals(customer.getId())) {
 			throw new CustomerException("Invalid customer id.");
 		}
@@ -54,7 +54,7 @@ public class CustomerService {
 		existingObj.setName(obj.getName());
 	}
 
-	public void deleteCustomer(Integer id) {
+	public void deleteCustomer(String id) {
 		if (id == null) {
 			throw new CustomerException("Customer id can not be null.");
 		}
