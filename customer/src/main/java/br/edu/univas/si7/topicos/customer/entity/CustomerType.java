@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 import br.edu.univas.si7.topicos.customer.exception.CustomerException;
 
 public enum CustomerType {
-	PESSOAFISICA(1), PESSOAJURIDICA(2);
+	PESSOAFISICA(0), PESSOAJURIDICA(1);
 
 	private int code;
 

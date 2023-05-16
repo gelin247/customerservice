@@ -52,6 +52,9 @@ public class CustomerService {
 
 	private void updateData(CustomerEntity existingObj, CustomerEntity obj) {
 		existingObj.setName(obj.getName());
+		existingObj.setEmail(obj.getEmail());
+		existingObj.setPhoneNumber(obj.getPhoneNumber());
+		existingObj.setType(obj.getType());
 	}
 
 	public void deleteCustomer(String id) {
